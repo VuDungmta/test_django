@@ -14,7 +14,8 @@ unzip gophish-v0.4-linux-64bit.zip && \
 rm -f gophish-v0.4-linux-64bit.zip
 
 WORKDIR /opt/gophish-v0.4-linux-64bit
-RUN sed -i "s|127.0.0.1|0.0.0.0|g" config.json && \
+RUN sed -i "s|127.0.0.1|0.0.0.0|g" config.json
+RUN sed -i "s|true|false|g" config.json
 chmod +x gophish
 
 EXPOSE 3333 80

@@ -1,0 +1,11 @@
+{
+  "name": "test_django",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:VuDungmta/test_django.git",
+  "author": "azoom-v-t-dung <v.t.dung@azoom.jp>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cd app && yarn start"
+  }
+}

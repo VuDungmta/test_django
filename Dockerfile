@@ -1,21 +1,14 @@
-FROM debian:jessie
-MAINTAINER Matteo Guglielmetti <matteo.guglielmetti@hotmail.it>
-
+FROM node:10
+WORKDIR /test_django
+ENV PORT 8080
+ENV HOST 0.0.0.0
 RUN apt-get update && \
-apt-get install --no-install-recommends -y \
-unzip \
-ca-certificates \
-wget && \
-apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-WORKDIR /opt
-RUN wget -nv https://github.com/gophish/gophish/releases/download/v0.4.0/gophish-v0.4-linux-64bit.zip && \
-unzip gophish-v0.4-linux-64bit.zip && \
-rm -f gophish-v0.4-linux-64bit.zip
-
-WORKDIR /opt/gophish-v0.4-linux-64bit
-RUN sed -i "s|127.0.0.1|0.0.0.0|g" config.json && \
-chmod +x gophish
-
-EXPOSE 3333 80
-ENTRYPOINT ["./gophish"]
+    apt-get install -yq gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 \
+    libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 \
+    libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 \
+    libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 \
+    ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
+COPY ./app .
+RUN yarn install
+EXPOSE 8080
+ENTRYPOINT ["yarn", "start"]

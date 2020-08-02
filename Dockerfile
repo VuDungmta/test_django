@@ -12,3 +12,4 @@ COPY ./app .
 RUN yarn install
 EXPOSE 8080
 ENTRYPOINT ["yarn", "start"]
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app
